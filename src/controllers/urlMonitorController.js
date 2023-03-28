@@ -47,7 +47,7 @@ export function startUrlMonitor(ctx) {
 
 export function listUrlMonitors(ctx) {
   const chatId = ctx.chat?.id;
-  if (chatId === process.env.process.env.TELEGRAM_CHAT_ID) {
+  if (chatId === process.env.TELEGRAM_CHAT_ID) {
     if (!chatId) {
       ctx.reply('Error: Unable to get chat ID.');
       return;
