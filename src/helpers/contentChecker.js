@@ -1,5 +1,9 @@
 import puppeteer from 'puppeteer';
 import fs from 'fs';
+// import path, { dirname } from 'path';
+// import { fileURLToPath } from 'url';
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = dirname(__filename);
 
 const ensureValidUrl = (url) => {
   if (!url.startsWith('http://') && !url.startsWith('https://')) {
@@ -9,11 +13,21 @@ const ensureValidUrl = (url) => {
 }
 
 const saveScreenshot = async(savePath, currentHtml, page, url, browser) => {
-  const screenshotPath = `./assets/${url}.png`;
+  // console.log('__dirname', __dirname);
+  // const screenshotPath = path.join(__dirname, `../../assets/${url}.png`);
+  const folderPath = 'assets';
+  console.log('folderPath', folderPath);
+
+  if (!fs.existsSync(folderPath)) {
+    console.log('folderPath does not exist');
+    fs.mkdirSync(folderPath);
+  }
+
+  const screenshotPath = `assets/${url}.png`;
   await page.screenshot({ path: screenshotPath });
   
   fs.writeFileSync(savePath, currentHtml);
-
+  
   await browser.close();
   return screenshotPath;
 }
