@@ -21,7 +21,7 @@ const saveScreenshot = async(savePath, currentHtml, page, url, browser) => {
 export const checkForChanges = async(rawUrl, savePath) => {
   try {
     const url = ensureValidUrl(rawUrl);  
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({args: ['--no-sandbox']});
     const page = await browser.newPage();
     await page.goto(url);  
     await page.waitForSelector('body');
