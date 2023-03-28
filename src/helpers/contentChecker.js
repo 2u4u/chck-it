@@ -9,7 +9,7 @@ const ensureValidUrl = (url) => {
 }
 
 const saveScreenshot = async(savePath, currentHtml, page, url, browser) => {
-  const screenshotPath = `assets/${url}.png`;
+  const screenshotPath = `./assets/${url}.png`;
   await page.screenshot({ path: screenshotPath });
   
   fs.writeFileSync(savePath, currentHtml);

@@ -17,3 +17,10 @@ Navigate to https://api.telegram.org/bot[YOUR_BOT_TOKEN]/getUpdates and check th
 * Send a message to your bot with the following format: ```/monitor [URL] [CRON_EXPRESSION]```
 * Send ```/list ``` to get list of available URLs
 * Send ```/stop [URL]``` to stop monitoring of the URL
+
+## Troubleshooting
+
+On ubuntu you will probably need to install some dependencies (tested on ubuntu 20.04)):
+```bash
+sudo apt-get install libcairo2 libpango-1.0-0 libxkbcommon-x11-0 libgbm-dev libxrandr2 libxfixes3 libxdamage1 libxcomposite1 libcups2 libatk-bridge2.0-0
+```
