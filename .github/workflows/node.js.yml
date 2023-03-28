@@ -1,0 +1,35 @@
+name: Deploy CHCK-IT app
+
+on:
+  push:
+    branches: [ main ]
+
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - name: Executing remote ssh commands using password
+        uses: appleboy/ssh-action@v0.1.7
+        env:
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+          GIT_SSH_COMMAND: 'ssh -Tv'
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          script: |
+            cd chck-it
+            git pull origin main
+            npm install
+            pm2 restart chck-it-app
+
+      - name: Send POST request to API
+        run: |
+          curl -X POST -H 'Content-Type: application/json' -d '{"message": "chck it app successfully deployed"}' http://mssge.ru/api/send-message
