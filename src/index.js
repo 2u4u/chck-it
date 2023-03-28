@@ -1,4 +1,6 @@
 import { createBot } from './bot.js';
+import { config } from 'dotenv';
+config();
 
 const token = process.env.TELEGRAM_BOT_TOKEN;
 if (!token) {

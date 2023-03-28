@@ -1,7 +1,9 @@
+import { config } from 'dotenv';
 import { validate, schedule as _schedule } from 'node-cron';
 import { checkForChanges } from '../helpers/contentChecker.js';
 import { prettifyCron } from '../helpers/prettifyCron.js';
 const monitors = [];
+config();
 
 export function startUrlMonitor(ctx) {
   const chatId = ctx.chat?.id;
