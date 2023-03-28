@@ -5,9 +5,10 @@ import { prettifyCron } from '../helpers/prettifyCron.js';
 const monitors = [];
 config();
 
+const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID.toString();
 export function startUrlMonitor(ctx) {
   const chatId = ctx.chat?.id;
-  if (chatId === process.env.TELEGRAM_CHAT_ID) {
+  if (chatId.toString() === TELEGRAM_CHAT_ID) {
     const input = ctx.message?.text?.split(' ');
     if (!input || input.length < 3) {
       ctx.reply('Please provide a URL and a cron schedule, separated by a space.');
@@ -47,7 +48,7 @@ export function startUrlMonitor(ctx) {
 
 export function listUrlMonitors(ctx) {
   const chatId = ctx.chat?.id;
-  if (chatId === process.env.TELEGRAM_CHAT_ID) {
+  if (chatId.toString() === TELEGRAM_CHAT_ID) {
     if (!chatId) {
       ctx.reply('Error: Unable to get chat ID.');
       return;
@@ -72,7 +73,7 @@ export function listUrlMonitors(ctx) {
 
 export function stopUrlMonitor(ctx) {
   const chatId = ctx.chat?.id;
-  if (chatId === process.env.TELEGRAM_CHAT_ID) {
+  if (chatId.toString() === TELEGRAM_CHAT_ID) {
     const input = ctx.message?.text?.split(' ');
     if (!input || input.length !== 2) {
       ctx.reply('Please provide the URL you want to stop monitoring.');
